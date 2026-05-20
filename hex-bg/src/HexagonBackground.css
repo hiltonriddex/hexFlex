@@ -1,0 +1,80 @@
+:root {
+  --hex-width: 17.32px;
+  --hex-height: 20px;
+  --off-white: #fafafa;
+  --light-grey: #e0e0e0;
+  --border-grey: #d1d1d1;
+  --transition-speed: 0.6s;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Keeps the background static */
+  background-color: var(--off-white);
+}
+
+.hex-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: var(--off-white);
+}
+
+.hex-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hex-row {
+  display: flex;
+  /* This creates the honeycomb offset */
+  margin-top: calc(var(--hex-height) * -0.25);
+}
+
+/* Offset every even row to lock the hexagons together */
+.hex-row:nth-child(even) {
+  margin-left: var(--hex-width);
+}
+
+.hex-cell {
+  width: var(--hex-width);
+  height: var(--hex-height);
+  cursor: crosshair;
+  perspective: 1000px; /* Essential for 3D flip */
+}
+
+.hex-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform var(--transition-speed);
+  transform-style: preserve-3d;
+}
+
+/* The actual Flip Trigger */
+.hex-cell:hover .hex-inner {
+  transform: rotateY(180deg);
+}
+
+.hex-front, .hex-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  /* Create the Hexagon Shape */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hex-front {
+  background-color: var(--off-white);
+  border: 1px solid var(--border-grey); /* Note: Clip-path crops borders, we'll use a shadow trick if needed */
+  box-shadow: inset 0 0 0 1px var(--border-grey); /* Simulates border inside clip-path */
+}
+
+.hex-back {
+  background-color: var(--light-grey);
+  transform: rotateY(180deg);
+  box-shadow: inset 0 0 0 1px var(--border-grey);
+}
