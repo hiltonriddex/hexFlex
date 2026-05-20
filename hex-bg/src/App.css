@@ -1,15 +1,54 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: #fafafa;
+/* --- BRANDING & LOGO STYLES --- */
+.brand-logo {
+  position: fixed;
+  top: 30px;    /* 30px from top */
+  left: 25px;   /* 25px from left */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none; /* Allows mouse to still interact with hexagons behind logo */
 }
 
-.hex-canvas {
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  cursor: crosshair;
+.logo-text {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #000; /* Dark for 'Rdx' */
+  text-transform: none;
+}
+
+.logo-tech {
+  color: #FF0000; /* Vibrant Red for 'Tech' */
+}
+
+/* Update Nav Menu to not overlap if screen is small */
+.nav-menu {
+  position: fixed;
+  top: 30px; /* Aligned with logo top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 25px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  border: 1px solid #eee;
+}
+
+/* Smooth red hover for nav buttons to match branding */
+.nav-menu button:hover {
+  color: #FF0000;
+}
+
+.nav-menu button.active {
+  color: #FF0000;
+}
+
+/* Ensure content buttons also match the red brand */
+.content-card button:hover {
+  border-color: #FF0000;
+  color: #FF0000;
 }
